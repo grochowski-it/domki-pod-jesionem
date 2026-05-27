@@ -10,14 +10,11 @@ if [ -f .env ]; then
   set +a
 fi
 
-PROMPT="PAMIĘTAJ: Działasz w trybie Caveman. Musisz zacząć od 'Caveman mode: ON'. Używaj tylko skilli: caveman, caveman-commit, caveman-review. $1"
+HARD_PROMPT="PAMIĘTAJ: Działasz w trybie Caveman. Musisz zacząć od 'Caveman mode: ON'. Używaj tylko skilli: caveman, caveman-commit, caveman-review. Pamiętaj o załadowaniu zmiennych z .env."
+USER_PROMPT="$1"
 
-# Wywołujemy komendę przekazaną w argumentach skryptu
 shift
-OUTPUT=$("$@" "$PROMPT")
-echo "$OUTPUT" | python3 scripts/validator.py
-if [ $? -eq 0 ]; then
-  echo "$OUTPUT"
-else
+"$@" "$HARD_PROMPT $USER_PROMPT" | python3 scripts/validator.py
+if [ ${PIPESTATUS[1]} -ne 0 ]; then
   exit 1
 fi
