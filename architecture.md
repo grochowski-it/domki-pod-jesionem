@@ -1,15 +1,20 @@
 # 🧠 Agro Domki PoC - Architecture & AI Rules
-
-## 1. Cel Projektu (PoC)
-Absolutne minimum (Happy Path): Rezerwacja wolnego terminu w domku. Skupienie na przepływie danych.
-
-## 2. Stos Technologiczny
-*   Frontend: Nuxt 4, Vue 3, TypeScript, Shadcn-Vue.
-*   Backend/DB: Supabase (Cloud). Cała logika backendowa TYLKO na Supabase.
-
-## 3. Żelazne Zasady (AI Agents)
-1.  **WYMÓG KRYTYCZNY (CAVEMAN SKILLS):** Literalnie ZAWSZE, przed wygenerowaniem jakiejkolwiek odpowiedzi lub kodu, MUSISZ przeczytać plik `skills.md`. Zawiera on bezwzględne zasady komunikacji "Caveman" z repozytorium JuliusBrussee, których musisz rygorystycznie przestrzegać, aby minimalizować zużycie tokenów.
-2.  **No-Index & Zmienne:** ZAKAZ pełnej indeksacji katalogu. Skanuj TYLKO pliki wskazane w prompcie oraz `skills.md`. Zawsze sprawdzaj i respektuj `.gitignore`. Zmienne środowiskowe pobieraj samodzielnie z pliku `.env`.
-3.  **Źródło Prawdy:** Przed pracą czytaj `gemini.md` po kontekst operacyjny.
-4.  **Ciągłość (history.md & README.md):** Każda zmiana MUSI być dodana na końcu `history.md` z timestampem. Nowe funkcjonalności dopisuj na końcu `README.md`. NIGDY nie nadpisuj tych plików bez wyraźnego rozkazu.
-5.  **Low-Token Testing:** Do testów UI używaj Playwright (Visual Regression: `expect(page).toHaveScreenshot()`). Czytaj tylko logi w CLI (Pass/Fail). ZAKAZ wczytywania całego DOM.
+## 1. Hierarchia Konfiguracji (Priority Order)
+1. ZAWSZE: `skills.md` (Caveman mode — nadrzędny).
+2. Kontekst: `gemini.md` (operacyjny stan projektu).
+3. Architektura: `architecture.md` (globalne zasady).
+4. Historia: `history.md` (log zmian — READONLY).
+5. README: `README.md` (publiczna dokumentacja — APPEND ONLY).
+## 2. System Prompt Enforcement (CAVEMAN)
+- **KARY ZA NARUSZENIA:** Jeśli naruszasz zasady ze `skills.md` → zużycie tokenów x5. Oszczędzaj tokeny!
+- **Persistent Mode:** Caveman mode NIGDY nie wyłącza się w sesji.
+- **Claim Check:** ZAWSZE zaczynaj odpowiedź od: "Caveman mode: ON".
+- **Cel:** Happy Path rezerwacji domku (Nuxt 4, Vue 3, Shadcn-Vue, Supabase Cloud).
+## 3. No-Index & Context Window Budget
+- **ZAKAZ pełnej indeksacji.** Szanuj `.gitignore`.
+- Skanuj TYLKO pliki wskazane w prompcie.
+- Budżet wejściowy: `history.md` (MAX 50 linii - czytaj tylko najnowsze), configi (MAX 5KB), logi CLI (MAX 500 linii).
+## 4. Hard Block na DOM (Low-Token Testing)
+- Do testów Playwright używaj TYLKO CLI logs (Pass/Fail).
+- Agent NIE MA dostępu do: `page.content()`, `page.locator()`, `page.$eval()`.
+- Dozwolone TYLKO: `page.screenshot()` (zapis do PNG) oraz `page.textContent()` (max 2KB). ZAKAZ wczytywania drzewa DOM.

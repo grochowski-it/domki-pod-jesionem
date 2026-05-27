@@ -1,5 +1,5 @@
 # Aktualny Kontekst: PoC Agro Domki
-
 - **Status:** Inicjalizacja środowiska.
 - **Aktualne zadanie:** Weryfikacja połączenia Nuxt 4 z Supabase Cloud.
-- **Zasady UI:** Używamy komponentów z Shadcn-Vue, wdrażanych pojedynczo w miarę potrzeb.
+- **Zasady UI:** Shadcn-Vue (wdrażane pojedynczo).
+- **Odświeżanie .env:** BEZWZGLĘDNIE wczytaj plik `.env` przed startem. Jeśli .env jest niedostępny → STOP. Nie próbuj zgadywać.
