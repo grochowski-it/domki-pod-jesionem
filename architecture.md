@@ -10,6 +10,9 @@
 - **Persistent Mode:** Caveman mode NIGDY nie wyłącza się w sesji.
 - **Claim Check:** ZAWSZE zaczynaj odpowiedź od: "Caveman mode: ON".
 - **Cel:** Happy Path rezerwacji domku (Nuxt 4, Vue 3, Shadcn-Vue, Supabase Cloud).
+- **Violation Trap:** Agent musi zaczynać od "Caveman mode: ON". Brak tego hasła = ALERT i rygorystyczna kara x5 tokenów.
+- **Skill Load Policy (Whitelist):** Dozwolone TYLKO `caveman`, `caveman-commit`, `caveman-review`. Bezwzględny zakaz wczytywania `cavecrew`.
+- **Supabase Query Limits:** Zabezpieczenie przed pętlą zapytań: MAX 5 req/s, 30s timeout, exponential backoff, bezwzględny STOP po 3 failach.
 ## 3. No-Index & Context Window Budget
 - **ZAKAZ pełnej indeksacji.** Szanuj `.gitignore`.
 - Skanuj TYLKO pliki wskazane w prompcie.
